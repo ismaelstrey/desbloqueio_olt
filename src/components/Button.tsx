@@ -16,6 +16,7 @@ export function Button({
   };
 
   return (
+    // @ts-ignore
     <motion.button
       initial={{ scale: 1 }}
       whileHover={{ scale: 1.02 }}
