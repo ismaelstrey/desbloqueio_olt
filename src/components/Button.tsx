@@ -5,8 +5,7 @@ import { ButtonProps } from '@/@types';
 export function Button({ 
   children, 
   variant = 'primary', 
-  className = '', 
-  ...props 
+  className = '',
 }: ButtonProps) {
   const baseStyles = 'px-6 py-3 rounded-full font-medium transition-all text-sm md:text-base';
   const variants = {
@@ -19,9 +18,10 @@ export function Button({
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={`${baseStyles} ${variants[variant]} ${className} `}
-      {...props}
+    
     >
       {children}
+  
     </motion.button>
   );
 }

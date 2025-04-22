@@ -19,10 +19,12 @@ export interface AnimatedSectionProps {
   delay?: number;
 }
 
-export interface ButtonProps extends ForwardRefComponent<HTMLButtonElement, HTMLMotionProps<"button">> {
+export interface ButtonMotionProps extends ForwardRefComponent<HTMLButtonElement, HTMLMotionProps<"button">>,  React.ButtonHTMLAttributes<HTMLButtonElement> {
+  
+}
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary';
   className?: string;
 }
-
-// ForwardRefComponent<HTMLButtonElement, HTMLMotionProps<"button">>
