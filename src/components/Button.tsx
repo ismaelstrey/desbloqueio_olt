@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { ButtonProps } from '@/@types';
-
 export function Button({ 
   children, 
   variant = 'primary', 
@@ -14,9 +13,7 @@ export function Button({
     primary: 'bg-accent text-background hover:bg-accent/90',
     secondary: 'border-2 border-accent text-accent hover:bg-accent/10'
   };
-
   return (
-    // @ts-ignore
     <motion.button
       initial={{ scale: 1 }}
       whileHover={{ scale: 1.02 }}

@@ -1,3 +1,5 @@
+import { ForwardRefComponent, HTMLMotionProps } from "framer-motion";
+
 export interface ContactFormData {
   nome: string;
   empresa: string;
@@ -17,8 +19,10 @@ export interface AnimatedSectionProps {
   delay?: number;
 }
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ForwardRefComponent<HTMLButtonElement, HTMLMotionProps<"button">> {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary';
   className?: string;
 }
+
+// ForwardRefComponent<HTMLButtonElement, HTMLMotionProps<"button">>
