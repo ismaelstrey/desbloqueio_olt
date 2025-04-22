@@ -1,11 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Desbloqueio e Atualização de OLT Huawei
 
-## Getting Started
+Uma aplicação web moderna desenvolvida com Next.js 15 para oferecer serviços de desbloqueio e atualização de OLTs Huawei.
 
-First, run the development server:
+## 🚀 Funcionalidades
 
+- Interface moderna e responsiva
+- Formulário de contato integrado
+- Animações suaves com Framer Motion
+- Design otimizado para conversão
+- Seções informativas sobre benefícios e serviços
+
+## 💻 Tecnologias Utilizadas
+
+- **Next.js 15.3.1** - Framework React com renderização do lado do servidor
+- **React 19** - Biblioteca para construção de interfaces
+- **TypeScript** - Tipagem estática para maior segurança
+- **Tailwind CSS v4** - Framework CSS para estilização
+- **Framer Motion** - Biblioteca de animações
+- **ESLint** - Linting e padronização de código
+
+## 🛠️ Começando
+
+1. Clone o repositório
+2. Instale as dependências:
 ```bash
-npm run dev
+npm install
 # or
 yarn dev
 # or
