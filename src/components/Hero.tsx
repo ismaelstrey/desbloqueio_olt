@@ -11,7 +11,7 @@ export function Hero() {
   };
 
   return (
-    <section id="inicio" className="min-h-[100vh] bg-no-repeat flex items-center justify-center text-center px-4 md:px-8 mx-auto">   
+    <section id="inicio" className="min-h-[100vh] bg-no-repeat md:flex-row flex-col flex items-center justify-center text-center px-4 md:px-8 mx-auto">   
    
    <div>  <motion.div
       initial={{ opacity: 0 }}

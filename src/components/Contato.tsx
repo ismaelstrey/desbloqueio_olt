@@ -25,7 +25,7 @@ export function Contato() {
   };
 
   return (
-    <section id="contato" className="py-16 px-4 md:px-8 max-w-6xl mx-auto">
+    <section id="contato" className="py-16 justify-center content-center min-h-screen px-4 md:px-8 max-w-6xl mx-auto">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

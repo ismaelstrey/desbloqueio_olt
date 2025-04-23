@@ -41,7 +41,7 @@ export function Sobre() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
         {beneficios.map((beneficio, index) => (
           <AnimatedSection key={beneficio.titulo} delay={index * 0.1}>
-            <div className="flex flex-col items-center text-center p-6 rounded-lg bg-background hover:bg-background/20 transition-colors">
+            <div className="flex flex-col items-center text-center p-6 rounded-lg bg-background hover:scale-110 transition-all">
               {beneficio.icone}
               <h3 className="text-xl font-semibold mt-4 mb-2 text-accent">{beneficio.titulo}</h3>
               <p className="text-gray-300">{beneficio.descricao}</p>
