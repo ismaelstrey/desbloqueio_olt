@@ -50,7 +50,7 @@ export function Navbar() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl font-bold text-background"
           >
-            OLT Update
+            STREY :: Atualizaçoes de OLT
           </motion.div>
 
           {/* Desktop Menu */}
