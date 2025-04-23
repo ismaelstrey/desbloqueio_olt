@@ -10,12 +10,20 @@ export function Hero() {
   };
 
   return (
-    <section className="min-h-[80vh] flex flex-col items-center justify-center text-center px-4 md:px-8 max-w-6xl mx-auto">
+    <section className="min-h-[80vh] bg-no-repeat flex flex-col items-center justify-center text-center px-4 md:px-8 mx-auto">
+     <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="bg-[url(/olt3.png)] bg-contain bg-no-repeat bg-center h-full w-6xl absolute top-0 left-0 z-[-1]"
+      >
+        <div className="bg-background opacity-80 h-full w-full absolute top-0 left-0 z-[-1]"></div>
+      </motion.div>
       <motion.h1 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+        className="text-4xl md:text-6xl font-bold mb-11 leading-tight"
       >
         Atualize e Libere sua OLT Huawei com
         <span className="text-accent"> Rapidez e Segurança</span>
