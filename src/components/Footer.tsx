@@ -44,14 +44,17 @@ export function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-accent transition-colors"
+                className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2"
                 whileHover={{ scale: 1.1 }}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
+                aria-label={`Contate-nos via ${link.label}`}
+                title={`Contate-nos via ${link.label}`}
               >
                 {link.icon}
+                <span className="sr-only">{`Contate-nos via ${link.label}`}</span>
               </motion.a>
             ))}
           </div>
