@@ -23,7 +23,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-background/20 py-8 px-4 md:px-8">
+    <footer className="bg-background/20 py-8 px-4 md:px-8 border-t-1 border-accent/30">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

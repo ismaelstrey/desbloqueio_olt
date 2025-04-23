@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Button } from './Button';
+import Image from 'next/image';
 
 export function Hero() {
   const scrollToContact = () => {
@@ -10,14 +11,15 @@ export function Hero() {
   };
 
   return (
-    <section className="min-h-[80vh] bg-no-repeat flex flex-col items-center justify-center text-center px-4 md:px-8 mx-auto">
-     <motion.div
+    <section id="inicio" className="min-h-[100vh] bg-no-repeat flex items-center justify-center text-center px-4 md:px-8 mx-auto">   
+   
+   <div>  <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="bg-[url(/olt3.png)] bg-contain bg-no-repeat bg-center h-full w-6xl absolute top-0 left-0 z-[-1]"
+      className=" h-full w-6xl absolute top-0 left-0 z-[-1]"
       >
-        <div className="bg-background opacity-80 h-full w-full absolute top-0 left-0 z-[-1]"></div>
+    
       </motion.div>
       <motion.h1 
         initial={{ opacity: 0, y: -20 }}
@@ -46,6 +48,14 @@ export function Hero() {
         <Button onClick={scrollToContact}>
           Solicitar Atualização
         </Button>
+      </motion.div>
+      </div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+      <Image src="/olt1.svg" width={500} height={500} alt="Hero Image" priority className="w-full h-full" />
       </motion.div>
     </section>
   );
