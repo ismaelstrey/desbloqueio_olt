@@ -3,6 +3,7 @@ import { Sobre } from '@/components/Sobre';
 import { Beneficios } from '@/components/Beneficios';
 import { Contato } from '@/components/Contato';
 import { Footer } from '@/components/Footer';
+import { VantagensOLT } from '@/components/VantagensOLT';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <Hero />
         <Sobre />
         <Beneficios />
+        <VantagensOLT/>
         <Contato />
       </main>
       <Footer />
