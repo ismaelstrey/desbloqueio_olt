@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
 
@@ -8,11 +8,11 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
-  const menuItems = [
+  const menuItems = useMemo(() => [
     { href: '#inicio', label: 'Início' },
     { href: '#vantagens', label: 'Vantagens' },
     { href: '#contato', label: 'Contato' }
-  ];
+  ], []);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId.replace('#', ''));
@@ -33,7 +33,7 @@ export function Navbar() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [menuItems]); // menuItems é seguro como dependência pois está memorizado
 
   return (
     <motion.nav
@@ -50,7 +50,7 @@ export function Navbar() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl font-bold text-background"
           >
-            STREY :: Atualizaçoes de OLT
+            Atualiza Huawei
           </motion.div>
 
           {/* Desktop Menu */}
@@ -59,7 +59,7 @@ export function Navbar() {
               <motion.button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className={`text-sm font-medium cursor-pointer transition-colors ${activeSection === item.href.replace('#', '') ? 'text-background' : 'text-background/50 hover:text-background/80'}`}
+                className={`text-sm font-medium cursor-pointer transition-colors ${activeSection === item.href.replace('#', '') ? 'text-background border-b-2  transition-all scale-110' : 'text-background hover:text-background/80'}`}
                 whileHover={{ scale: 1.05 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

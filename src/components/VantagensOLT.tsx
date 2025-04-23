@@ -139,7 +139,7 @@ export function VantagensOLT() {
                 <tr className="border-b border-gray-700">
                   <th className="py-4 px-6 text-left">Versão</th>
                   <th className="py-4 px-6 text-left">Principais Novidades</th>
-                  <th className="py-4 px-6 text-left">Recomendação</th>
+                  <th className="py-4 px-6 text-left md:block hidden">Recomendação</th>
                 </tr>
               </thead>
               <tbody>
@@ -162,7 +162,7 @@ export function VantagensOLT() {
                         ))}
                       </ul>
                     </td>
-                    <td className="py-4 px-6">
+                    <td className="py-4 px-6 md:block md:px-2 hidden">
                       <span
                         className={`inline-block px-3 py-1 rounded-full text-sm ${versao.status === 'atual' ? 'bg-accent/20 text-accent' : 'bg-gray-700/50 text-gray-300'}`}
                       >

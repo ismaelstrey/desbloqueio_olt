@@ -107,7 +107,7 @@ export function Contato() {
             />
           </div>
 
-          <Button className="w-full">
+          <Button className="w-full cursor-pointer">
             Quero Atualizar Agora
           </Button>
         </div>

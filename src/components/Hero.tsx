@@ -35,7 +35,7 @@ export function Hero() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl"
+        className="text-lg w-full md:text-xl text-center text-gray-300 mb-8 text-italic"
       >
         Desbloqueio e atualização de firmware para maximizar o desempenho das suas redes.
       </motion.p>
@@ -45,7 +45,7 @@ export function Hero() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.4 }}
       >
-        <Button onClick={scrollToContact}>
+        <Button onClick={scrollToContact} className="cursor-pointer">
           Solicitar Atualização
         </Button>
       </motion.div>
