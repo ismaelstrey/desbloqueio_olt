@@ -58,6 +58,7 @@ export function Navbar() {
             {menuItems.map((item) => (
               <motion.button
                 key={item.href}
+                title={`Navvegar até ${item.label}`}
                 onClick={() => scrollToSection(item.href)}
                 className={`text-sm font-medium cursor-pointer transition-colors ${activeSection === item.href.replace('#', '') ? 'text-background border-b-2  transition-all scale-110' : 'text-background hover:text-background/80'}`}
                 whileHover={{ scale: 1.05 }}
@@ -73,6 +74,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <motion.button
             className="md:hidden text-gray-300 hover:text-accent"
+            title="Abrir Menu"
             onClick={() => setIsOpen(!isOpen)}
             whileTap={{ scale: 0.95 }}
           >
@@ -95,6 +97,7 @@ export function Navbar() {
           {menuItems.map((item) => (
             <motion.button
               key={item.href}
+              title={`Navvegar até ${item.label}`}
               onClick={() => scrollToSection(item.href)}
               className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium ${activeSection === item.href.replace('#', '') ? 'text-accent bg-accent/10' : 'text-gray-300 hover:text-accent hover:bg-accent/5'}`}
               whileHover={{ x: 10 }}

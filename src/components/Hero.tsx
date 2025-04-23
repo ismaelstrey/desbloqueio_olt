@@ -45,7 +45,7 @@ export function Hero() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.4 }}
       >
-        <Button onClick={scrollToContact} className="cursor-pointer">
+        <Button onClick={scrollToContact} className="cursor-pointer" title='Solicitar atualização'>
           Solicitar Atualização
         </Button>
       </motion.div>
