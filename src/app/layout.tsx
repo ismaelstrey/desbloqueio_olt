@@ -40,14 +40,58 @@ export default function RootLayout({
             "name": "Atualização OLT Huawei",
             "description": "Serviços especializados em atualização e manutenção de equipamentos OLT Huawei para empresas de telecomunicações",
             "areaServed": "Brasil",
-            "serviceType": ["Atualização de OLT", "Manutenção de Equipamentos de Telecomunicações", "Configuração GPON", "Atualização de Firmware"],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Serviços de OLT Huawei",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Atualização de OLT",
+                    "description": "Serviço especializado de atualização de equipamentos OLT Huawei"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Manutenção de Equipamentos",
+                    "description": "Serviços de manutenção para equipamentos de telecomunicações"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Configuração GPON",
+                    "description": "Serviços de configuração e otimização de redes GPON"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Atualização de Firmware",
+                    "description": "Serviço de atualização de firmware para equipamentos OLT"
+                  }
+                }
+              ]
+            },
             "knowsAbout": ["OLT Huawei", "GPON", "XGS-PON", "Redes Ópticas", "Telecomunicações"],
             "contactPoint": {
               "@type": "ContactPoint",
               "telephone": "+5551981754701",
               "email": "ismaelstrey@gmail.com",
               "contactType": "customer service"
-            }
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "BR",
+              "addressRegion": "RS"
+            },
+            "priceRange": "$$$",
+            "openingHours": ["Mo-Fr 08:00-18:00"]
           })}} />
       </head>
       <body
