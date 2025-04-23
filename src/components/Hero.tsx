@@ -17,7 +17,7 @@ export function Hero() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className=" h-full w-6xl absolute top-0 left-0 z-[-1]"
+      className=" h-full w-full md:w-6xl absolute top-0 left-0 z-[-1]"
       >
     
       </motion.div>

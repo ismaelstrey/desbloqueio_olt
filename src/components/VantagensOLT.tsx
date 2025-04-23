@@ -134,7 +134,7 @@ export function VantagensOLT() {
             Comparativo Entre Versões
           </h3>
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[800px]">
+            <table className="w-full min-w-[450px]">
               <thead>
                 <tr className="border-b border-gray-700">
                   <th className="py-4 px-6 text-left">Versão</th>
