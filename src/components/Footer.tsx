@@ -8,17 +8,17 @@ export function Footer() {
     {
       icon: <BsWhatsapp className="w-5 h-5" />,
       label: 'WhatsApp',
-      href: 'https://wa.me/seu-numero-aqui'
+      href: 'https://wa.me/5551981754701'
     },
     {
       icon: <BsEnvelope className="w-5 h-5" />,
       label: 'Email',
-      href: 'mailto:seu-email@exemplo.com'
+      href: 'mailto:ismaelstrey@gmail.com'
     },
     {
       icon: <BsLinkedin className="w-5 h-5" />,
       label: 'LinkedIn',
-      href: 'https://linkedin.com/in/seu-perfil'
+      href: 'https://www.linkedin.com/in/ismaelstrey/'
     }
   ];
 
