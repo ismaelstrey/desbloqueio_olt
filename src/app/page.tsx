@@ -15,7 +15,7 @@ export default function Home() {
         <Sobre />
         <Beneficios />
         <VantagensOLT/>
-        <Contato />
+        {/* <Contato /> */}
       </main>
       <Footer />
     </div>

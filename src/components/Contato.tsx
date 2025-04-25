@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './Button';
 import { ContactFormData } from '@/@types';
+import { IoCloseSharp } from 'react-icons/io5';
+import Link from 'next/link';
 
 export function Contato() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -25,7 +27,11 @@ export function Contato() {
   };
 
   return (
-    <section id="contato" className="py-16 justify-center content-center min-h-screen px-4 md:px-8 max-w-6xl mx-auto">
+   <div className='fixed z-40 top-0 left-0 bg-background w-screen h-screen '> 
+   <Link href="/">
+   <IoCloseSharp title='fechar' className='fixed top-12 right-12 hover:scale-110 cursor-pointer' color='red' size={60}/>
+   </Link>
+     <section id="contato" className=" py-16 justify-center content-center min-h-screen px-4 md:px-8 mx-auto">      
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -38,7 +44,6 @@ export function Contato() {
           Preencha o formulário abaixo para solicitar uma atualização ou tirar suas dúvidas
         </p>
       </motion.div>
-
       <motion.form
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -113,5 +118,6 @@ export function Contato() {
         </div>
       </motion.form>
     </section>
+   </div>
   );
 }

@@ -3,17 +3,16 @@
 import { motion } from 'framer-motion';
 import { Button } from './Button';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export function Hero() {
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contato');
-    contactSection?.scrollIntoView({ behavior: 'smooth' });
-  };
+const route = useRouter();
 
   return (
     <section id="inicio" className="min-h-[100vh] bg-no-repeat md:flex-row flex-col flex items-center justify-center text-center px-4 md:px-8 mx-auto">   
-   
-   <div>  <motion.div
+   <div>  
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
@@ -45,9 +44,12 @@ export function Hero() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.4 }}
       >
-        <Button onClick={scrollToContact} className="cursor-pointer" title='Solicitar atualização'>
+        <Link href="/cadastro">
+        <Button className="cursor-pointer" title='Solicitar atualização'>
+       
           Solicitar Atualização
         </Button>
+      </Link>
       </motion.div>
       </div>
       <motion.div

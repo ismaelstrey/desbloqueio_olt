@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
+import Link from 'next/link';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,8 +11,7 @@ export function Navbar() {
 
   const menuItems = useMemo(() => [
     { href: '#inicio', label: 'Início' },
-    { href: '#vantagens', label: 'Vantagens' },
-    { href: '#contato', label: 'Contato' }
+    { href: '#vantagens', label: 'Vantagens' }
   ], []);
 
   const scrollToSection = (sectionId: string) => {
@@ -40,7 +40,7 @@ export function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-accent backdrop-blur-sm border-b border-gray-800/20"
+      className="fixed top-0 left-0 right-0 z-30 bg-accent backdrop-blur-sm border-b border-gray-800/20"
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16">
@@ -69,6 +69,15 @@ export function Navbar() {
                 {item.label}
               </motion.button>
             ))}
+         <Link href="/cadastro">
+            <motion.button
+              title="Quero atualizar minha olt"
+              className="text-sm font-medium cursor-pointer transition-colors text-background hover:text-background/80"
+              whileHover={{ x: 10 }}
+              transition={{ duration: 0.2 }}
+              > Cadastro</motion.button>
+       
+          </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -106,6 +115,15 @@ export function Navbar() {
               {item.label}
             </motion.button>
           ))}
+          <Link href="/cadastro" className='bg-red-500'>
+            <motion.button
+              title="Quero atualizar minha olt"
+              className="block w-full text-left px-3 py-2 text-background hover:text-background/80 rounded-md text-base font-medium hover:bg-accent/5"
+              whileHover={{ x: 10 }}
+              transition={{ duration: 0.2 }}
+              > Cadastro</motion.button>
+       
+          </Link>
         </div>
       </motion.div>
     </motion.nav>
