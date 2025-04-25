@@ -6,19 +6,46 @@ import { Button } from './Button';
 import { ContactFormData } from '@/@types';
 import { IoCloseSharp } from 'react-icons/io5';
 import Link from 'next/link';
+import toast from "react-hot-toast";
 
 export function Contato() {
   const [formData, setFormData] = useState<ContactFormData>({
     nome: '',
     empresa: '',
     whatsapp: '',
-    descricao: ''
+    descricao: '',
+    olt_quantia: 0,
+    email: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aqui você pode implementar a lógica de envio do formulário
-    console.log('Dados do formulário:', formData);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
+      toast.success('Mensagem enviada com sucesso!');
+      setFormData({
+        nome: '',
+        empresa: '',
+        whatsapp: '',
+        descricao: '',
+        olt_quantia: 0,
+        email: '',
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Erro ao enviar mensagem. Tente novamente.');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -27,7 +54,7 @@ export function Contato() {
   };
 
   return (
-   <div className='fixed z-40 top-0 left-0 bg-background w-screen h-screen '> 
+   <div className='fixed z-40 top-0 left-0 bg-background w-screen min-h-screen '> 
    <Link href="/">
    <IoCloseSharp title='fechar' className='fixed top-12 right-12 hover:scale-110 cursor-pointer' color='red' size={60}/>
    </Link>
@@ -62,6 +89,35 @@ export function Contato() {
               id="nome"
               name="nome"
               value={formData.nome}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 rounded-lg bg-background/20 border border-gray-600 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+            />
+          </div>
+          <div>
+            <label htmlFor="nome" className="block text-sm font-medium mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 rounded-lg bg-background/20 border border-gray-600 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="nome" className="block text-sm font-medium mb-2">
+              Quantas OLT
+            </label>
+            <input
+              type="number"
+              id="olt_quantia"
+              name="olt_quantia"
+              value={formData.olt_quantia}
               onChange={handleChange}
               required
               className="w-full px-4 py-2 rounded-lg bg-background/20 border border-gray-600 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"

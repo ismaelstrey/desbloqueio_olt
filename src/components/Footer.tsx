@@ -6,24 +6,24 @@ import { motion } from 'framer-motion';
 export function Footer() {
   const socialLinks = [
     {
-      icon: <BsWhatsapp className="w-5 h-5" />,
+      icon: <BsWhatsapp className="w-5 h-5 hover:text-green-500 transition-colors" />,
       label: 'WhatsApp',
       href: 'https://wa.me/5551981754701'
     },
     {
-      icon: <BsEnvelope className="w-5 h-5" />,
+      icon: <BsEnvelope className="w-5 h-5 hover:text-green-500 transition-colors" />,
       label: 'Email',
       href: 'mailto:ismaelstrey@gmail.com'
     },
     {
-      icon: <BsLinkedin className="w-5 h-5" />,
+      icon: <BsLinkedin className="w-5 h-5 hover:text-blue-500" />,
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/ismaelstrey/'
     }
   ];
 
   return (
-    <footer className="bg-background/20 py-8 px-4 md:px-8 border-t-1 border-accent/30">
+    <footer className="bg-accent py-8 px-4 md:px-8 border-t-1 border-accent/30 text-background ">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -34,7 +34,7 @@ export function Footer() {
         >
           <div className="text-center md:text-left">
             <h3 className="text-xl font-bold mb-2">Contato</h3>
-            <p className="text-gray-300">Entre em contato conosco para mais informações</p>
+            <p>Entre em contato conosco para mais informações</p>
           </div>
 
           <div className="flex gap-6">
@@ -44,7 +44,7 @@ export function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-accent transition-colors flex items-center gap-2"
+                className="text-background transition-colors flex items-center gap-2"
                 whileHover={{ scale: 1.1 }}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center mt-8 text-sm text-gray-400"
+          className="text-center mt-8 text-sm text-background/80"
         >
           © {new Date().getFullYear()} Atualização OLT Huawei. Todos os direitos reservados.
         </motion.div>
