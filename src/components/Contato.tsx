@@ -7,6 +7,7 @@ import { ContactFormData } from '@/@types';
 import { IoCloseSharp } from 'react-icons/io5';
 import Link from 'next/link';
 import toast from "react-hot-toast";
+import { Loading } from '@/app/ui/Loading';
 
 export function Contato() {
   const [carregando, setCarregando] = useState<boolean>(false);
@@ -36,7 +37,7 @@ export function Contato() {
         throw new Error('Failed to send message');
       }
 
-      toast.success('Mensagem enviada com sucesso!');
+      toast.success('Mensagem enviada com sucesso!',{duration: 3000});
       setFormData({
         nome: '',
         empresa: '',
@@ -56,7 +57,7 @@ export function Contato() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
   if(carregando){
-    return <div className='flex w-full'>Enviando sua solicitação...</div>
+    return <Loading/>
   }
 
   return (
