@@ -9,6 +9,7 @@ import Link from 'next/link';
 import toast from "react-hot-toast";
 
 export function Contato() {
+  const [carregando, setCarregando] = useState<boolean>(false);
   const [formData, setFormData] = useState<ContactFormData>({
     nome: '',
     empresa: '',
@@ -20,6 +21,7 @@ export function Contato() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setCarregando(true);
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -28,6 +30,7 @@ export function Contato() {
         },
         body: JSON.stringify(formData),
       });
+      setCarregando(false);
 
       if (!response.ok) {
         throw new Error('Failed to send message');
@@ -52,6 +55,9 @@ export function Contato() {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
+  if(carregando){
+    return <div className='flex w-full'>Enviando sua solicitação...</div>
+  }
 
   return (
    <div className='fixed z-40 top-0 left-0 bg-background w-screen min-h-screen '> 
