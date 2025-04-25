@@ -61,17 +61,17 @@ export function Contato() {
   }
 
   return (
-   <div className='fixed z-40 top-0 left-0 bg-background w-screen min-h-screen '> 
+   <div className='flex flex-col bg-background w-full min-h-screen '> 
    <Link href="/">
-   <IoCloseSharp title='fechar' className='fixed top-12 right-12 hover:scale-110 cursor-pointer' color='red' size={60}/>
+   <IoCloseSharp title='fechar' className='fixed top-2 right-2  md:top-12 md:right-12  hover:scale-110 cursor-pointer' color='red' size={60}/>
    </Link>
-     <section id="contato" className=" py-16 justify-center content-center min-h-screen px-4 md:px-8 mx-auto">      
+     <section id="contato" className=" py-8 justify-center content-center px-4 md:px-8 mx-auto">      
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-12"
+        className="text-center mb-8"
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Entre em Contato</h2>
         <p className="text-gray-300 max-w-2xl mx-auto">
@@ -176,7 +176,7 @@ export function Contato() {
           </div>
 
           <Button className="w-full cursor-pointer" title='Quero artualizar minha olt'>
-            Quero Atualizar Agora
+            Agendar atualização
           </Button>
         </div>
       </motion.form>
