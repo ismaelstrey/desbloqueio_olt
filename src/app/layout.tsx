@@ -27,6 +27,8 @@ export const metadata: Metadata = {
   }
 };
 
+import { AuthProvider } from '@/providers/AuthProvider';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -98,11 +100,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
-        {children}
+        <AuthProvider>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+          />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
