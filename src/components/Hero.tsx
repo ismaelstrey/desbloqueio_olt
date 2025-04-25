@@ -3,11 +3,8 @@
 import { motion } from 'framer-motion';
 import { Button } from './Button';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-
 export function Hero() {
-
   return (
     <section id="inicio" className="min-h-[100vh] bg-no-repeat md:flex-row flex-col flex items-center justify-center text-center px-4 md:px-8 mx-auto">   
    <div>  
@@ -16,8 +13,7 @@ export function Hero() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
       className=" h-full w-full md:w-6xl absolute top-0 left-0 z-[-1]"
-      >
-    
+      >    
       </motion.div>
       <motion.h1 
         initial={{ opacity: 0, y: -20 }}
@@ -28,7 +24,6 @@ export function Hero() {
         Atualize e Libere sua OLT Huawei com
         <span className="text-accent"> Rapidez e Segurança</span>
       </motion.h1>
-
       <motion.p
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -37,15 +32,13 @@ export function Hero() {
       >
         Desbloqueio e atualização de firmware para maximizar o desempenho das suas redes.
       </motion.p>
-
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.4 }}
       >
         <Link href="/cadastro">
-        <Button className="cursor-pointer" title='Solicitar atualização'>
-       
+        <Button className="cursor-pointer" title='Solicitar atualização'>       
           Solicitar Atualização
         </Button>
       </Link>
