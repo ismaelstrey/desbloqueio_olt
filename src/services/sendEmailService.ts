@@ -67,20 +67,8 @@ const transporter = nodemailer.createTransport({
           <ul>
             <li>Cidade: ${city}</li>
             <li>País: ${countryName}</li>
-            <li>Estado: ${principalSubdivision}</li>
-          
-          </ul>
-          ${localityInfo.administrative.map((item:any) => `<span>
-            <li>${item.name}</li>
-            <li>${item.isoCode}</li>
-            <li>${item.municipality}</li>
-            <li>${item.postalCode}</li>
-            <li>${item.thoroughfare}</li>
-            <li>${item.locality}</li>
-            <li>${item.subLocality}</li>
-            </span>`).join('')}
-        
-        </div>
+            <li>Estado: ${principalSubdivision}</li>          
+          </ul> </div>
       `
     };
   
