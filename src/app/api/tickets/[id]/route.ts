@@ -3,6 +3,7 @@ import { z } from 'zod';
 import prisma from '@/services/prisma';
 import { getToken } from 'next-auth/jwt';
 import { TipoServico, StatusTicket, StatusPagamento, TipoPagamento } from '@prisma/client';
+import { GiConsoleController } from 'react-icons/gi';
 
 // Schema de validação para atualização de Ticket
 const ticketUpdateSchema = z.object({
@@ -64,13 +65,14 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
 // PUT /api/tickets/[id]
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+
   try {
     const token = await getToken({ req });
     if (!token) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
     }
 
-    const id = parseInt(params.id);
+    const id = await parseInt(params.id);
     if (isNaN(id)) {
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
     }
