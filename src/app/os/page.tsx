@@ -26,7 +26,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchTickets()
-  })
+  },[])
 
   const fetchTickets = async () => {
     try {
