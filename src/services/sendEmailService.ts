@@ -3,7 +3,7 @@ import { ContactFormData } from '@/@types';
 import { getClienteInfo, getLocalizacao } from './localizacaoService';
 
 
-const { city,countryName,localityInfo, principalSubdivision} = await getLocalizacao()
+const { city,countryName, principalSubdivision} = await getLocalizacao()
 const {ipNumeric, ipString, ipType, device, os} = await getClienteInfo()
 
 const transporter = nodemailer.createTransport({

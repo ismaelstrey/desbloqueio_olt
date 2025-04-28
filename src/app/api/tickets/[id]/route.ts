@@ -3,7 +3,6 @@ import { z } from 'zod';
 import prisma from '@/services/prisma';
 import { getToken } from 'next-auth/jwt';
 import { TipoServico, StatusTicket, StatusPagamento, TipoPagamento } from '@prisma/client';
-import { GiConsoleController } from 'react-icons/gi';
 
 // Schema de validação para atualização de Ticket
 const ticketUpdateSchema = z.object({

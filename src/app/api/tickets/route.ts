@@ -62,8 +62,12 @@ export async function GET(req: NextRequest) {
     const empresaId = searchParams.get('empresaId');
     const oltId = searchParams.get('oltId');
     const status = searchParams.get('status') as StatusTicket | null;
-
-    const where: any = {};
+interface WhereClause {
+  empresaId?: number;
+  oltId?: number;
+  status?: StatusTicket;
+}
+    const where: WhereClause = {};
     if (empresaId) where.empresaId = parseInt(empresaId);
     if (oltId) where.oltId = parseInt(oltId);
     if (status) where.status = status;
