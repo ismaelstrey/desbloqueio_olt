@@ -32,7 +32,7 @@ export default function TicketDetalhes({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetchTicket()
-  }, [])
+  })
 
   const fetchTicket = async () => {
     try {
