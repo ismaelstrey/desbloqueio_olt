@@ -1,0 +1,244 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-01-01T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_auth_signin",
+      "parentId": "fld_auth",
+      "name": "Login Google",
+      "url": "{{ _.base_url }}/api/auth/signin",
+      "method": "GET",
+      "headers": [],
+      "params": [],
+      "authentication": {},
+      "metaSortKey": -1000,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_auth",
+      "parentId": "wrk_desbloquio_olt",
+      "name": "Autenticação",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_desbloquio_olt",
+      "parentId": null,
+      "name": "API Desbloqueio OLT",
+      "description": "API para gerenciamento de desbloqueios de OLTs",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_auth_signout",
+      "parentId": "fld_auth",
+      "name": "Logout",
+      "url": "{{ _.base_url }}/api/auth/signout",
+      "method": "GET",
+      "headers": [],
+      "params": [],
+      "authentication": {},
+      "metaSortKey": -900,
+      "_type": "request"
+    },
+    {
+      "_id": "req_empresas_list",
+      "parentId": "fld_empresas",
+      "name": "Listar Empresas",
+      "url": "{{ _.base_url }}/api/empresas",
+      "method": "GET",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "params": [],
+      "authentication": {},
+      "metaSortKey": -800,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_empresas",
+      "parentId": "wrk_desbloquio_olt",
+      "name": "Empresas",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -800,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_empresas_create",
+      "parentId": "fld_empresas",
+      "name": "Criar Empresa",
+      "url": "{{ _.base_url }}/api/empresas",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Empresa Exemplo\",\n  \"cnpj\": \"12345678901234\",\n  \"email\": \"contato@empresa.com\",\n  \"telefone\": \"1234567890\",\n  \"endereco\": \"Endereço exemplo\"\n}"
+      },
+      "authentication": {},
+      "metaSortKey": -700,
+      "_type": "request"
+    },
+    {
+      "_id": "req_olts_list",
+      "parentId": "fld_olts",
+      "name": "Listar OLTs",
+      "url": "{{ _.base_url }}/api/olts",
+      "method": "GET",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "params": [
+        {
+          "name": "empresaId",
+          "value": "1",
+          "description": "Filtro opcional por empresa"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -600,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_olts",
+      "parentId": "wrk_desbloquio_olt",
+      "name": "OLTs",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -600,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_olts_create",
+      "parentId": "fld_olts",
+      "name": "Criar OLT",
+      "url": "{{ _.base_url }}/api/olts",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"empresaId\": 1,\n  \"nome\": \"OLT Exemplo\",\n  \"marca\": \"Marca Exemplo\",\n  \"modelo\": \"Modelo Exemplo\",\n  \"tipo\": \"TIPO_OLT\",\n  \"firmware\": \"v1.0\",\n  \"firmwareTipo\": \"Tipo Exemplo\",\n  \"ipAcesso\": \"192.168.1.1\",\n  \"usuario\": \"admin\",\n  \"senha\": \"senha123\",\n  \"localizacao\": \"Local Exemplo\",\n  \"observacoes\": \"Observações exemplo\"\n}"
+      },
+      "authentication": {},
+      "metaSortKey": -500,
+      "_type": "request"
+    },
+    {
+      "_id": "req_tickets_list",
+      "parentId": "fld_tickets",
+      "name": "Listar Tickets",
+      "url": "{{ _.base_url }}/api/tickets",
+      "method": "GET",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "params": [
+        {
+          "name": "empresaId",
+          "value": "1",
+          "description": "Filtro opcional por empresa"
+        },
+        {
+          "name": "oltId",
+          "value": "1",
+          "description": "Filtro opcional por OLT"
+        },
+        {
+          "name": "status",
+          "value": "PENDENTE",
+          "description": "Filtro opcional por status"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -400,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_tickets",
+      "parentId": "wrk_desbloquio_olt",
+      "name": "Tickets",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -400,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_tickets_create",
+      "parentId": "fld_tickets",
+      "name": "Criar Ticket",
+      "url": "{{ _.base_url }}/api/tickets",
+      "method": "POST",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"empresaId\": 1,\n  \"oltId\": 1,\n  \"titulo\": \"Ticket Exemplo\",\n  \"descricao\": \"Descrição exemplo\",\n  \"tipoServico\": \"TIPO_SERVICO\",\n  \"status\": \"PENDENTE\",\n  \"valorServico\": 100.00,\n  \"statusPagamento\": \"AGUARDANDO\",\n  \"tipoPagamento\": \"PIX\",\n  \"criadoPor\": \"usuario@exemplo.com\"\n}"
+      },
+      "authentication": {},
+      "metaSortKey": -300,
+      "_type": "request"
+    },
+    {
+      "_id": "env_base",
+      "parentId": "wrk_desbloquio_olt",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "token": "seu_token_jwt_aqui"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "token"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 0,
+      "_type": "environment"
+    }
+  ]
+}

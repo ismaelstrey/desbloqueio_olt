@@ -1,55 +1,198 @@
-# Desbloqueio e Atualização de OLT Huawei
+# API de Desbloqueio OLT
 
-Uma aplicação web moderna desenvolvida com Next.js 15 para oferecer serviços de desbloqueio e atualização de OLTs Huawei.
+## Visão Geral
 
-## 🚀 Funcionalidades
+API RESTful para gerenciamento de desbloqueios de OLTs, desenvolvida com Next.js e TypeScript.
 
-- Interface moderna e responsiva
-- Formulário de contato integrado
-- Animações suaves com Framer Motion
-- Design otimizado para conversão
-- Seções informativas sobre benefícios e serviços
+## Autenticação
 
-## 💻 Tecnologias Utilizadas
+A API utiliza autenticação via NextAuth com Google OAuth2. Todas as rotas da API requerem autenticação.
 
-- **Next.js 15.3.1** - Framework React com renderização do lado do servidor
-- **React 19** - Biblioteca para construção de interfaces
-- **TypeScript** - Tipagem estática para maior segurança
-- **Tailwind CSS v4** - Framework CSS para estilização
-- **Framer Motion** - Biblioteca de animações
-- **ESLint** - Linting e padronização de código
+### Fluxo de Autenticação
 
-## 🛠️ Começando
+- Login via Google: `/api/auth/signin`
+- Logout: `/api/auth/signout`
+- Callback: `/api/auth/callback/google`
 
-1. Clone o repositório
-2. Instale as dependências:
-```bash
-npm install
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Todas as requisições autenticadas devem incluir o token JWT nas headers.
+
+## Endpoints
+
+### Empresas
+
+#### GET /api/empresas
+
+Retorna a lista de todas as empresas cadastradas.
+
+**Resposta (200)**
+
+```json
+[
+  {
+    "id": 1,
+    "nome": "Empresa Exemplo",
+    "cnpj": "12345678901234",
+    "email": "contato@empresa.com",
+    "telefone": "1234567890",
+    "endereco": "Endereço exemplo",
+    "olts": [...],
+    "tickets": [...]
+  }
+]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### POST /api/empresas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Cria uma nova empresa.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Corpo da Requisição**
 
-## Learn More
+```json
+{
+  "nome": "string",
+  "cnpj": "string (14 dígitos)",
+  "email": "string",
+  "telefone": "string (min 10 dígitos)",
+  "endereco": "string (opcional)"
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+**Resposta (201)**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```json
+{
+  "id": 1,
+  "nome": "Empresa Exemplo",
+  "cnpj": "12345678901234",
+  "email": "contato@empresa.com",
+  "telefone": "1234567890",
+  "endereco": "Endereço exemplo"
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### OLTs
 
-## Deploy on Vercel
+#### GET /api/olts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Retorna a lista de OLTs. Aceita filtro por empresaId como query parameter.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Parâmetros de Query**
+
+- `empresaId`: (opcional) Filtra OLTs por empresa
+
+**Resposta (200)**
+
+```json
+[
+  {
+    "id": 1,
+    "empresaId": 1,
+    "nome": "OLT Exemplo",
+    "marca": "string",
+    "modelo": "string",
+    "tipo": "TIPO_OLT",
+    "firmware": "string",
+    "firmwareTipo": "string",
+    "ipAcesso": "string",
+    "empresa": {...},
+    "tickets": [...]
+  }
+]
+```
+
+#### POST /api/olts
+
+Cria uma nova OLT.
+
+**Corpo da Requisição**
+
+```json
+{
+  "empresaId": "number",
+  "nome": "string",
+  "marca": "string",
+  "modelo": "string",
+  "tipo": "TIPO_OLT",
+  "firmware": "string",
+  "firmwareTipo": "string",
+  "ipAcesso": "string (opcional)",
+  "usuario": "string (opcional)",
+  "senha": "string (opcional)",
+  "localizacao": "string (opcional)",
+  "observacoes": "string (opcional)"
+}
+```
+
+### Tickets
+
+#### GET /api/tickets
+
+Retorna a lista de tickets. Aceita múltiplos filtros como query parameters.
+
+**Parâmetros de Query**
+
+- `empresaId`: (opcional) Filtra tickets por empresa
+- `oltId`: (opcional) Filtra tickets por OLT
+- `status`: (opcional) Filtra tickets por status
+
+**Resposta (200)**
+
+```json
+[
+  {
+    "id": 1,
+    "empresaId": 1,
+    "oltId": 1,
+    "titulo": "string",
+    "descricao": "string",
+    "tipoServico": "TIPO_SERVICO",
+    "status": "STATUS_TICKET",
+    "valorServico": "number",
+    "statusPagamento": "STATUS_PAGAMENTO",
+    "tipoPagamento": "TIPO_PAGAMENTO",
+    "dataSolicitacao": "date",
+    "dataConclusao": "date",
+    "empresa": {...},
+    "olt": {...}
+  }
+]
+```
+
+#### POST /api/tickets
+
+Cria um novo ticket.
+
+**Corpo da Requisição**
+
+```json
+{
+  "empresaId": "number",
+  "oltId": "number",
+  "titulo": "string",
+  "descricao": "string",
+  "tipoServico": "TIPO_SERVICO",
+  "status": "STATUS_TICKET",
+  "valorServico": "number",
+  "statusPagamento": "STATUS_PAGAMENTO",
+  "tipoPagamento": "TIPO_PAGAMENTO (opcional)",
+  "dataConclusao": "date (opcional)",
+  "criadoPor": "string",
+  "resolvidoPor": "string (opcional)"
+}
+```
+
+## Códigos de Status
+
+- 200: Sucesso
+- 201: Criado com sucesso
+- 400: Erro de validação
+- 401: Não autorizado
+- 404: Recurso não encontrado
+- 500: Erro interno do servidor
+
+## Proteção de Rotas
+
+A aplicação implementa dois níveis de proteção:
+
+1. **Middleware de Autenticação**: Protege todas as rotas da API, exceto as rotas de autenticação (/api/auth/\*).
+2. **Proteção de Páginas**: Redireciona usuários não autenticados para a página de login ao tentar acessar rotas protegidas (/os/\*).

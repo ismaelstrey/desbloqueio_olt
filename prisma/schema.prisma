@@ -51,3 +51,97 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+// Empresa: Cadastro da empresa que possui as OLTs
+model Empresa {
+    id        Int      @id @default(autoincrement())
+    nome      String
+    cnpj      String   @unique
+    email     String
+    telefone  String
+    endereco  String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    olts      Olt[]
+    tickets   Ticket[]
+}
+
+// OLT: Equipamentos que serão atualizados ou desbloqueados
+model Olt {
+    id           Int      @id @default(autoincrement())
+    empresaId    Int
+    nome         String
+    marca        String
+    modelo       String
+    tipo         TipoOlt
+    firmware     String
+    firmwareTipo String
+    ipAcesso     String?
+    usuario      String?
+    senha        String?
+    localizacao  String?
+    observacoes  String?
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+    empresa      Empresa  @relation(fields: [empresaId], references: [id])
+    tickets      Ticket[]
+}
+
+// Ticket: Ordem de serviço associada a uma OLT
+model Ticket {
+    id              Int             @id @default(autoincrement())
+    empresaId       Int
+    oltId           Int
+    titulo          String
+    descricao       String
+    tipoServico     TipoServico
+    status          StatusTicket
+    valorServico    Float // <- valor do serviço
+    statusPagamento StatusPagamento // <- pago, pendente, cancelado
+    tipoPagamento   TipoPagamento? // <- qual tipo (Pix, Boleto, etc) (opcional até ser pago)
+    dataSolicitacao DateTime        @default(now())
+    dataConclusao   DateTime?
+    criadoPor       String
+    resolvidoPor    String?
+    createdAt       DateTime        @default(now())
+    updatedAt       DateTime        @updatedAt
+    empresa         Empresa         @relation(fields: [empresaId], references: [id])
+    olt             Olt             @relation(fields: [oltId], references: [id])
+}
+
+// Tipos de OLT
+enum TipoOlt {
+    GPON
+    EPON
+}
+
+// Tipos de Serviço
+enum TipoServico {
+    Atualizacao
+    Desbloqueio
+    AtualizacaoEDesbloqueio
+}
+
+// Status do Ticket
+enum StatusTicket {
+    Aberto
+    EmAndamento
+    Finalizado
+    Cancelado
+}
+
+// Status de Pagamento
+enum StatusPagamento {
+    Pendente
+    Pago
+    Cancelado
+}
+
+// Tipos de Pagamento
+enum TipoPagamento {
+    Pix
+    Boleto
+    Dinheiro
+    CartaoCredito
+    CartaoDebito
+}
