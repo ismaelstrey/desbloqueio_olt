@@ -23,14 +23,15 @@ const oltUpdateSchema = z.object({
 });
 
 // GET /api/olts/[id]
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const token = await getToken({ req });
     if (!token) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
     }
+    const novoId = (await params).id;
 
-    const id = parseInt(params.id);
+    const id = parseInt(novoId);
     if (isNaN(id)) {
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
     }
@@ -58,14 +59,16 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 }
 
 // PUT /api/olts/[id]
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const token = await getToken({ req });
     if (!token) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
     }
 
-    const id = parseInt(params.id);
+    const novoId = (await params).id;
+
+    const id = parseInt(novoId);
     if (isNaN(id)) {
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
     }
@@ -125,14 +128,15 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 }
 
 // DELETE /api/olts/[id]
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const token = await getToken({ req });
     if (!token) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
     }
 
-    const id = parseInt(params.id);
+    const novoId = (await params).id;
+    const id = parseInt(novoId);
     if (isNaN(id)) {
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
     }
