@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import prisma from '@/services/prisma';
 import { getToken } from 'next-auth/jwt';
-import { TipoOlt } from '@prisma/client';
+import { TipoOlt } from '@/@types/models';
 
 // Schema de validação para OLT
 const oltSchema = z.object({
