@@ -40,7 +40,7 @@ export default function Dashboard() {
   }
   useEffect(() => {
     fetchTickets()
-  },[filtroStatus])
+  },[filtroStatus, fetchTickets])
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'Finalizado':

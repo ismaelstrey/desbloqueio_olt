@@ -35,12 +35,6 @@ export default function TicketDetalhes({ params }: { params: Promise<{ id: strin
     const meuId = await params
     setId(Number(meuId.id))
   }
-
-  useEffect(() => {
-    getId()
-    id && fetchTicket()
-  },[id])
-
   const fetchTicket = async () => {
     try {
       const response = await fetch(`/api/tickets/${id}`)
@@ -57,6 +51,15 @@ export default function TicketDetalhes({ params }: { params: Promise<{ id: strin
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    getId()
+    if (id) {
+      fetchTicket()
+    }
+  },[id, getId, fetchTicket])
+
+ 
 
   const atualizarStatus = async (novoStatus: string) => {
     if (!ticket) return
