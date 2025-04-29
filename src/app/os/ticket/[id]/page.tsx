@@ -58,7 +58,6 @@ export default function TicketDetalhes({ params }: { params: Promise<{ id: strin
     }
   }
 
-
   const atualizarStatus = async (novoStatus: string) => {
     if (!ticket) return
 
