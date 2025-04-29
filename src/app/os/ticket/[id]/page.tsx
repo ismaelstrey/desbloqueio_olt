@@ -57,7 +57,7 @@ export default function TicketDetalhes({ params }: { params: Promise<{ id: strin
     if (id) {
       fetchTicket()
     }
-  },[id, getId, fetchTicket])
+  },[id])
 
  
 
