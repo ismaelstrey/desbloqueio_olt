@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaTicketAlt, FaCheckCircle, FaHourglassHalf, FaExclamationCircle } from 'react-icons/fa'
+import Link from 'next/link'
 
 
 
@@ -39,7 +40,7 @@ export default function Dashboard() {
   }
   useEffect(() => {
     fetchTickets()
-  },[filtroStatus,fetchTickets])
+  },[filtroStatus])
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'Finalizado':
@@ -129,19 +130,21 @@ export default function Dashboard() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 className="bg-gray-700 p-4 rounded-lg flex justify-between items-center hover:bg-gray-600 transition-all cursor-pointer"
-                onClick={() => window.location.href = `/os/ticket/${ticket.id}`}
+              
               >
-                <div className="flex items-center space-x-4">
+                <Link className="flex items-center space-x-4" href={`/os/ticket/${ticket.id}`}>
+             
                   {getStatusIcon(ticket.status)}
                   <div>
                     <h3 className="font-semibold">{ticket.titulo}</h3>
                     <p className="text-sm text-gray-400">{ticket.empresa.nome}</p>
                   </div>
-                </div>
+                   </Link>
                 <div className="text-right">
                   <p className="text-sm">{new Date(ticket.dataSolicitacao).toLocaleDateString()}</p>
                   <p className="text-[#F3F821]">R$ {ticket.valorServico.toFixed(2)}</p>
                 </div>
+           
               </motion.div>
             ))}
           </div>

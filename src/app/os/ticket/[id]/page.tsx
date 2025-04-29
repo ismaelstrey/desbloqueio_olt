@@ -24,19 +24,26 @@ interface Ticket {
   }
 }
 
-export default function TicketDetalhes({ params }: { params: { id: string } }) {
+export default function TicketDetalhes({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter()
   const [ticket, setTicket] = useState<Ticket | null>(null)
   const [loading, setLoading] = useState(true)
   const [atualizando, setAtualizando] = useState(false)
+  const [id, setId] = useState<number>(0)
+
+ async function getId () {
+    const meuId = await params
+    setId(Number(meuId.id))
+  }
 
   useEffect(() => {
-    fetchTicket()
-  })
+    getId()
+    id && fetchTicket()
+  },[id])
 
   const fetchTicket = async () => {
     try {
-      const response = await fetch(`/api/tickets/${params.id}`)
+      const response = await fetch(`/api/tickets/${id}`)
       if (response.ok) {
         const data = await response.json()
         setTicket(data)
@@ -51,6 +58,7 @@ export default function TicketDetalhes({ params }: { params: { id: string } }) {
     }
   }
 
+
   const atualizarStatus = async (novoStatus: string) => {
     if (!ticket) return
 
@@ -63,7 +71,7 @@ export default function TicketDetalhes({ params }: { params: { id: string } }) {
         },
         body: JSON.stringify({
           status: novoStatus,
-          id: ticket.id
+          id
         }),
       })
 
