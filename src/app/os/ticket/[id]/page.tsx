@@ -23,8 +23,11 @@ interface Ticket {
     modelo: string
   }
 }
+interface PageParams {
+  params: Promise<{ id: string }>
+};
 
-export default function TicketDetalhes({ params }: { params: Promise<{ id: string }> }) {
+export default function TicketDetalhes({ params }: PageParams) {
   const router = useRouter()
   const [ticket, setTicket] = useState<Ticket | null>(null)
   const [loading, setLoading] = useState(true)
