@@ -1,5 +1,14 @@
 # API de Desbloqueio OLT
 
+https://www.atualizarhuawei.com.br/api/auth/callback/google
+
+## ENV
+
+GOOGLE_CLIENT_ID=seu_client_id
+GOOGLE_CLIENT_SECRET=seu_client_secret
+NEXTAUTH_URL=https://www.atualizarhuawei.com.br
+NEXTAUTH_SECRET=sua_chave_secreta
+
 ## Visão Geral
 
 API RESTful para gerenciamento de desbloqueios de OLTs, desenvolvida com Next.js e TypeScript.

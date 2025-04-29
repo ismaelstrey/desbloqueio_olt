@@ -58,3 +58,11 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   variant?: 'primary' | 'secondary';
   className?: string;
 }
+
+export interface UserProps {
+  id?:string | undefined | null
+  name?:string | undefined | null
+  email?:string | undefined | undefined
+  image?:string | null | undefined
+  emailVerified?:boolean | null | undefined
+}

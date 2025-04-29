@@ -2,9 +2,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { signOut,getSession} from 'next-auth/react';
 import { motion } from 'framer-motion'
 import { FaTicketAlt, FaCheckCircle, FaHourglassHalf, FaExclamationCircle } from 'react-icons/fa'
 import Link from 'next/link'
+import { UserProps } from '@/@types';
 
 
 
@@ -21,6 +23,7 @@ interface Ticket {
 }
 
 export default function Dashboard() {
+  const [usuario, setUsuario] = useState<UserProps>()
   const [tickets, setTickets] = useState<Ticket[]>([])
   const [loading, setLoading] = useState(true)
   const [filtroStatus, setFiltroStatus] = useState('todos')
@@ -38,7 +41,14 @@ export default function Dashboard() {
       setLoading(false)
     }
   }
+  const usuarioLogado = async () =>{
+    const user = await getSession()
+    setUsuario(user?.user as UserProps)
+   
+  }
   useEffect(() => {
+    
+    usuarioLogado()
     fetchTickets()
   },[filtroStatus])
   const getStatusIcon = (status: string) => {
@@ -73,11 +83,19 @@ export default function Dashboard() {
         className="flex justify-between items-center"
       >
         <h1 className="text-3xl font-bold">Dashboard</h1>
+        
+        <span className='text-white'>{usuario?.email}</span>
         <button
           onClick={() => window.location.href = '/os/novo-ticket'}
           className="bg-[#F3F821] text-black px-6 py-2 rounded-lg hover:bg-opacity-90 transition-all"
         >
           Novo Ticket
+        </button>
+        <button
+          onClick={() => signOut()}
+          className="bg-[#21f1f8] cursor-pointer text-black px-6 py-2 rounded-lg hover:bg-opacity-90 transition-all"
+        >
+          Sair
         </button>
       </motion.div>
 
