@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import prisma from '@/services/prisma';
 import { getToken } from 'next-auth/jwt';
-import { TipoServico, StatusTicket, StatusPagamento, TipoPagamento } from '@prisma/client';
+import { StatusTicket, TipoServico, StatusPagamento, TipoPagamento } from '@/@types/models';
 
 // Schema de validação para Ticket
 const ticketSchema = z.object({
