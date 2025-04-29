@@ -24,7 +24,7 @@ interface Ticket {
   }
 }
 interface PageParams {
-  params: Promise<{ id: string }>
+  params: { id: string }
 };
 
 export default function TicketDetalhes({ params }: PageParams) {
@@ -34,9 +34,8 @@ export default function TicketDetalhes({ params }: PageParams) {
   const [atualizando, setAtualizando] = useState(false)
   const [id, setId] = useState<number>(0)
 
- async function getId () {
-    const meuId = await params
-    setId(Number(meuId.id))
+ function getId () {
+    setId(Number(params.id))
   }
   const fetchTicket = async () => {
     try {
