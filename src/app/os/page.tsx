@@ -24,9 +24,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [filtroStatus, setFiltroStatus] = useState('todos')
 
-  useEffect(() => {
-    fetchTickets()
-  },[filtroStatus])
+
 
   const fetchTickets = async () => {
     try {
@@ -39,7 +37,9 @@ export default function Dashboard() {
       setLoading(false)
     }
   }
-
+  useEffect(() => {
+    fetchTickets()
+  },[filtroStatus,fetchTickets])
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'Finalizado':

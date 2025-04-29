@@ -3,20 +3,21 @@ import prisma from '@/services/prisma';
 import { getToken } from 'next-auth/jwt';
 
 // GET /api/empresas/[id]
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const token = await getToken({ req });
     if (!token) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
     }
 
-    const id = parseInt(params.id);
-    if (isNaN(id)) {
+    const { id } = await params;
+const bodo_id = parseInt(id);
+    if (isNaN(bodo_id)) {
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
     }
 
     const empresa = await prisma.empresa.findUnique({
-      where: { id },
+      where: { id:bodo_id },
       include: {
         olts: true,
         tickets: true,
@@ -36,21 +37,22 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     );
   }
 }
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const token = await getToken({ req });
     if (!token) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
     }
-
-    const id = parseInt(params.id);
-    if (isNaN(id)) {
+const { id } = await params;
+const bodo_id = parseInt(id);
+ 
+    if (isNaN(bodo_id)) {
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
     }
 
     // Verificar se a empresa existe
     const empresaExistente = await prisma.empresa.findUnique({
-      where: { id },
+      where: { id:bodo_id },
       include: {
         olts: true,
         tickets: true,
@@ -73,7 +75,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     }
 
     await prisma.empresa.delete({
-      where: { id },
+      where: { id:bodo_id },
     });
 
     return NextResponse.json({ message: 'Empresa excluída com sucesso' });
