@@ -23,19 +23,21 @@ interface Ticket {
     modelo: string
   }
 }
-interface PageParams {
-  params: { id: string }
-};
 
-export default function TicketDetalhes({ params }: PageParams) {
+export default function TicketDetalhes({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
   const router = useRouter()
   const [ticket, setTicket] = useState<Ticket | null>(null)
   const [loading, setLoading] = useState(true)
   const [atualizando, setAtualizando] = useState(false)
   const [id, setId] = useState<number>(0)
 
- function getId () {
-    setId(Number(params.id))
+ async function getId () {
+  const myId = await params
+    setId(Number(myId.id))
   }
   const fetchTicket = async () => {
     try {
@@ -59,13 +61,10 @@ export default function TicketDetalhes({ params }: PageParams) {
     if (id) {
       fetchTicket()
     }
-  },[id])
-
- 
+  },[id]) 
 
   const atualizarStatus = async (novoStatus: string) => {
     if (!ticket) return
-
     setAtualizando(true)
     try {
       const response = await fetch(`/api/tickets`, {
@@ -78,7 +77,6 @@ export default function TicketDetalhes({ params }: PageParams) {
           id
         }),
       })
-
       if (response.ok) {
         const ticketAtualizado = await response.json()
         setTicket(ticketAtualizado)
@@ -92,7 +90,6 @@ export default function TicketDetalhes({ params }: PageParams) {
       setAtualizando(false)
     }
   }
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Finalizado':
@@ -112,7 +109,7 @@ export default function TicketDetalhes({ params }: PageParams) {
         return <FaCheckCircle className="text-green-500" />
       case 'EmAndamento':
         return <FaHourglassHalf className="text-yellow-500" />
-      case 'PENDENTE':
+      case 'Aberto':
         return <FaExclamationCircle className="text-red-500" />
       default:
         return null
@@ -122,11 +119,9 @@ export default function TicketDetalhes({ params }: PageParams) {
   if (loading) {
     return <div className="text-center py-8">Carregando...</div>
   }
-
   if (!ticket) {
     return <div className="text-center py-8">Ticket não encontrado</div>
   }
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -142,7 +137,6 @@ export default function TicketDetalhes({ params }: PageParams) {
           Voltar
         </button>
       </div>
-
       <div className="bg-gray-800 rounded-lg p-6 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
