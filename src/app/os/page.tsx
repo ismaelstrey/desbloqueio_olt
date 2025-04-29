@@ -42,11 +42,11 @@ export default function Dashboard() {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'CONCLUIDO':
+      case 'Finalizado':
         return <FaCheckCircle className="text-green-500" />
-      case 'EM_ANDAMENTO':
+      case 'EmAndamento':
         return <FaHourglassHalf className="text-yellow-500" />
-      case 'PENDENTE':
+      case 'Aberto':
         return <FaExclamationCircle className="text-red-500" />
       default:
         return <FaTicketAlt className="text-gray-500" />
