@@ -3,19 +3,32 @@ generator client {
 }
 
 datasource db {
-    provider          = "postgresql"
-    url               = env("DATABASE_URL")
-    shadowDatabaseUrl = env("DATABASE_SHADOW_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+    // shadowDatabaseUrl = env("DATABASE_SHADOW_URL")
+}
+
+// Tipos de Usuário
+enum Role {
+    ADMIN
+    TECNICO
+    CLIENTE
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+    id                String    @id @default(cuid())
+    name              String?
+    email             String?   @unique
+    emailVerified     DateTime?
+    image             String?
+    role              Role      @default(CLIENTE)
+    empresaId         Int? // Opcional pois ADMIN e TECNICO não estão vinculados a empresa
+    empresa           Empresa?  @relation(fields: [empresaId], references: [id])
+    accounts          Account[]
+    sessions          Session[]
+    tickets           Ticket[]  @relation("CriadoPor")
+    ticketsResolvidos Ticket[]  @relation("ResolvidoPor")
+    Ticket            Ticket[]
 }
 
 model Account {
@@ -65,6 +78,7 @@ model Empresa {
     updatedAt DateTime @updatedAt
     olts      Olt[]
     tickets   Ticket[]
+    usuarios  User[]
 }
 
 // OLT: Equipamentos que serão atualizados ou desbloqueados
@@ -102,12 +116,16 @@ model Ticket {
     tipoPagamento   TipoPagamento? // <- qual tipo (Pix, Boleto, etc) (opcional até ser pago)
     dataSolicitacao DateTime        @default(now())
     dataConclusao   DateTime?
-    criadoPor       String
-    resolvidoPor    String?
+    criadoPorId     String // ID do usuário que criou o ticket
+    resolvidoPorId  String? // ID do usuário que resolveu o ticket (opcional)
     createdAt       DateTime        @default(now())
     updatedAt       DateTime        @updatedAt
     empresa         Empresa         @relation(fields: [empresaId], references: [id])
     olt             Olt             @relation(fields: [oltId], references: [id])
+    criadoPor       User            @relation("CriadoPor", fields: [criadoPorId], references: [id])
+    resolvidoPor    User?           @relation("ResolvidoPor", fields: [resolvidoPorId], references: [id])
+    usuarios        User?           @relation(fields: [userId], references: [id])
+    userId          String?
 }
 
 // Tipos de OLT

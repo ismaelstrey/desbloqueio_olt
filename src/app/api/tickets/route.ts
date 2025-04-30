@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import prisma from '@/services/prisma';
 import { getToken } from 'next-auth/jwt';
-import { StatusTicket, TipoServico, StatusPagamento, TipoPagamento } from '@/@types/models';
+import { StatusTicket, TipoServico, StatusPagamento, TipoPagamento } from '@prisma/client';
 
 // Schema de validação para Ticket
 const ticketSchema = z.object({
@@ -24,8 +24,8 @@ const ticketSchema = z.object({
     errorMap: () => ({ message: 'Tipo de pagamento inválido' }),
   }).optional(),
   dataConclusao: z.date().optional(),
-  criadoPor: z.string().min(1, 'Criador é obrigatório'),
-  resolvidoPor: z.string().optional(),
+  criadoPorId: z.string().min(1, 'ID do criador é obrigatório'),
+  resolvidoPorId: z.string().optional(),
 });
 
 const ticketUpdateSchema = z.object({
@@ -47,7 +47,7 @@ const ticketUpdateSchema = z.object({
     errorMap: () => ({ message: 'Tipo de pagamento inválido' }),
   }).optional(),
   dataConclusao: z.date().optional(),
-  resolvidoPor: z.string().optional(),
+  resolvidoPorId: z.string().optional(),
 });
 
 // GET /api/tickets
@@ -144,7 +144,8 @@ export async function POST(req: NextRequest) {
     const ticket = await prisma.ticket.create({
       data: {
         ...validacao.data,
-        dataSolicitacao: new Date(),
+        dataSolicitacao: new Date(),     
+        
       },
       include: {
         empresa: true,

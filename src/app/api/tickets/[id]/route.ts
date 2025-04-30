@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import prisma from '@/services/prisma';
 import { getToken } from 'next-auth/jwt';
-import { TipoServico, StatusTicket, StatusPagamento, TipoPagamento } from '@/@types/models';
+import { TipoServico, StatusTicket, StatusPagamento, TipoPagamento } from '@prisma/client';
 
 // Schema de validação para atualização de Ticket
 const ticketUpdateSchema = z.object({
@@ -24,7 +24,8 @@ const ticketUpdateSchema = z.object({
     errorMap: () => ({ message: 'Tipo de pagamento inválido' }),
   }).optional(),
   dataConclusao: z.date().optional(),
-  resolvidoPor: z.string().optional(),
+  resolvidoPorId: z.string().optional(),
+  userId: z.string().optional(),
 });
 
 // GET /api/tickets/[id]

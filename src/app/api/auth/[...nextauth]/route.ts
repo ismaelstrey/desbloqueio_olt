@@ -1,8 +1,10 @@
-import prisma from "@/services/prisma";
+
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
+import { Role } from "@prisma/client";
+import prisma from "@/services/prisma";
 
 const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -35,12 +37,24 @@ const authOptions: NextAuthOptions = {
         user: {
           ...session.user,
           id: token.sub,
+          role: token.role as Role,
+          empresaId: token.empresaId as number | null,
         },
       };
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === "update" && session?.user) {
+        return { ...token, ...session.user };
+      }
+      
       if (user) {
-        token.id = user.id;
+        const dbUser = await prisma.user.findUnique({
+          where: { id: user.id },
+          select: { role: true, empresaId: true }
+        });
+
+        token.role = dbUser?.role || "CLIENTE";
+        token.empresaId = dbUser?.empresaId;
       }
       return token;
     },
