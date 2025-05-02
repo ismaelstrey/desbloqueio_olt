@@ -1,78 +1,32 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useTicketForm } from '@/hooks/useTicketForm'
 import { useRouter } from 'next/navigation'
 
-interface Empresa {
-  id: number
-  nome: string
-  olts: Array<{
-    id: number
-    nome: string
-  }>
-}
-
 export default function NovoTicket() {
-  const router = useRouter()
-  const [loading, setLoading] = useState(false)
-  const [empresas, setEmpresas] = useState<Empresa[]>([])
-  const [selectedEmpresa, setSelectedEmpresa] = useState('')
-  const [selectedOlt, setSelectedOlt] = useState('')
-  const [formData, setFormData] = useState({
-    titulo: '',
-    descricao: '',
-    tipoServico: 'Desbloqueio', // DESBLOQUEIO, ATUALIZACAO
-    valorServico: '1000',
-     criadoPor: "usuario@exemplo.com"
-  })
+  const {
+    loading,
+    empresas,
+    selectedEmpresa,
+    selectedOlt,
+    formData,
+    errors,
+    fetchEmpresas,
+    initializeUserData,
+    handleInputChange,
+    handleEmpresaChange,
+    handleOltChange,
+    handleSubmit
+  } = useTicketForm()
 
-
-  const fetchEmpresas = async () => {
-    try {
-      const response = await fetch('/api/empresas')
-      const data = await response.json()
-      setEmpresas(data)
-    } catch (error) {
-      console.error('Erro ao buscar empresas:', error)
-    }
-  }
   useEffect(() => {
     fetchEmpresas()
-  }, [] )
+    initializeUserData()
+  }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-
-    try {
-      const response = await fetch('/api/tickets', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          empresaId: parseInt(selectedEmpresa),
-          oltId: parseInt(selectedOlt),
-          status: 'Aberto',
-          statusPagamento: 'Pendente',
-          valorServico: parseFloat(formData.valorServico)
-        }),
-      })
-
-      if (response.ok) {
-        router.push('/os')
-      } else {
-        throw new Error('Erro ao criar ticket')
-      }
-    } catch (error) {
-      console.error('Erro:', error)
-      alert('Erro ao criar ticket. Tente novamente.')
-    } finally {
-      setLoading(false)
-    }
-  }
+  const router = useRouter()
 
   return (
     <motion.div
@@ -93,13 +47,28 @@ export default function NovoTicket() {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-4">
           <div>
+            <label className="block text-sm font-medium mb-2" htmlFor="titulo">
+              ID
+            </label>
+            <input
+              type="text"
+              disabled
+              id="criadoPorId"
+              name="criadoPorId"
+              value={formData.criadoPorId}
+              className="w-full opacity-50 bg-gray-700 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-[#F3F821] focus:outline-none"
+            />
+          </div>
+
+          <div>
             <label className="block text-sm font-medium mb-2" htmlFor="empresa">
               Empresa
             </label>
             <select
               id="empresa"
+              name="empresaId"
               value={selectedEmpresa}
-              onChange={(e) => setSelectedEmpresa(e.target.value)}
+              onChange={handleEmpresaChange}
               className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-[#F3F821] focus:outline-none"
               required
             >
@@ -110,6 +79,9 @@ export default function NovoTicket() {
                 </option>
               ))}
             </select>
+            {errors.empresaId && (
+              <p className="text-red-500 text-sm mt-1">{errors.empresaId}</p>
+            )}
           </div>
 
           <div>
@@ -118,8 +90,9 @@ export default function NovoTicket() {
             </label>
             <select
               id="olt"
+              name="oltId"
               value={selectedOlt}
-              onChange={(e) => setSelectedOlt(e.target.value)}
+              onChange={handleOltChange}
               className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-[#F3F821] focus:outline-none"
               required
               disabled={!selectedEmpresa}
@@ -133,6 +106,9 @@ export default function NovoTicket() {
                   </option>
                 ))}
             </select>
+            {errors.oltId && (
+              <p className="text-red-500 text-sm mt-1">{errors.oltId}</p>
+            )}
           </div>
 
           <div>
@@ -142,11 +118,15 @@ export default function NovoTicket() {
             <input
               type="text"
               id="titulo"
+              name="titulo"
               value={formData.titulo}
-              onChange={(e) => setFormData({ ...formData, titulo: e.target.value })}
+              onChange={handleInputChange}
               className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-[#F3F821] focus:outline-none"
               required
             />
+            {errors.titulo && (
+              <p className="text-red-500 text-sm mt-1">{errors.titulo}</p>
+            )}
           </div>
 
           <div>
@@ -155,11 +135,15 @@ export default function NovoTicket() {
             </label>
             <textarea
               id="descricao"
+              name="descricao"
               value={formData.descricao}
-              onChange={(e) => setFormData({ ...formData, descricao: e.target.value })}
+              onChange={handleInputChange}
               className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-[#F3F821] focus:outline-none min-h-[100px]"
               required
             />
+            {errors.descricao && (
+              <p className="text-red-500 text-sm mt-1">{errors.descricao}</p>
+            )}
           </div>
 
           <div>
@@ -168,14 +152,18 @@ export default function NovoTicket() {
             </label>
             <select
               id="tipoServico"
+              name="tipoServico"
               value={formData.tipoServico}
-              onChange={(e) => setFormData({ ...formData, tipoServico: e.target.value })}
+              onChange={handleInputChange}
               className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-[#F3F821] focus:outline-none"
               required
             >
-              <option value="Desbloquio">Desbloqueio</option>
+              <option value="Desbloqueio">Desbloqueio</option>
               <option value="Atualizacao">Atualização</option>
             </select>
+            {errors.tipoServico && (
+              <p className="text-red-500 text-sm mt-1">{errors.tipoServico}</p>
+            )}
           </div>
 
           <div>
@@ -185,13 +173,17 @@ export default function NovoTicket() {
             <input
               type="number"
               id="valorServico"
+              name="valorServico"
               value={formData.valorServico}
-              onChange={(e) => setFormData({ ...formData, valorServico: e.target.value })}
+              onChange={handleInputChange}
               className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-[#F3F821] focus:outline-none"
               required
               min="0"
               step="0.01"
             />
+            {errors.valorServico && (
+              <p className="text-red-500 text-sm mt-1">{errors.valorServico}</p>
+            )}
           </div>
         </div>
 
