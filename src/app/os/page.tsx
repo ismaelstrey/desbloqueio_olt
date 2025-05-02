@@ -1,15 +1,8 @@
-
 'use client'
-
 import { useEffect, useState } from 'react'
-import { signOut,getSession} from 'next-auth/react';
 import { motion } from 'framer-motion'
 import { FaTicketAlt, FaCheckCircle, FaHourglassHalf, FaExclamationCircle } from 'react-icons/fa'
 import Link from 'next/link'
-import { UserProps } from '@/@types';
-
-
-
 interface Ticket {
   id: number
   titulo: string
@@ -28,9 +21,6 @@ export default function Dashboard() {
   const [tickets, setTickets] = useState<Ticket[]>([])
   const [loading, setLoading] = useState(true)
   const [filtroStatus, setFiltroStatus] = useState('todos')
-
-
-
   const fetchTickets = async () => {
     try {
       const response = await fetch('/api/tickets' + (filtroStatus !== 'todos' ? `?status=${filtroStatus}` : ''))
