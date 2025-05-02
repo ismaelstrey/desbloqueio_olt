@@ -44,10 +44,10 @@ return <div className="fixed h-full top-8 left-8">
          className="flex justify-around ml-5 flex-col gap-8 h-full"
          > 
        
-            <ul className="flex flex-col justify-center items-center content-center text-amber-200 hover:text-amber-300">
-                <li><IoExit onClick={() => signOut()} title="Sair" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/></li>
-                <li>{usuario?.name}</li> 
-             </ul>
+            <div onClick={() => signOut()} className="flex flex-col justify-center items-center content-center text-amber-200 hover:text-red-500">
+                <span><IoExit title="Sair" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/></span>
+                <span>{usuario?.name}</span> 
+             </div>
         </motion.div>
   </div>
   
