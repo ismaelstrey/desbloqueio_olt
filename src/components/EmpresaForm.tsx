@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
+import toast from 'react-hot-toast';
 
 const empresaSchema = z.object({
   nome: z.string().min(1, 'Nome é obrigatório'),
@@ -55,8 +56,8 @@ export default function EmpresaForm() {
         const erro = await response.json();
         throw new Error(erro.error || 'Erro ao cadastrar empresa');
       }
-
-      router.push('/dashboard'); // Redireciona após sucesso
+      toast.success('Empresa cadastrada com sucesso');
+      router.push('/os'); // Redireciona após sucesso
     } catch (erro) {
       if (erro instanceof z.ZodError) {
         setError(erro.errors[0].message);

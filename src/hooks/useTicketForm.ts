@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { getSession } from 'next-auth/react'
 import { ticketSchema, type TicketFormData } from '@/schemas/ticketSchema'
+import toast from 'react-hot-toast'
 
 interface Empresa {
   id: number
@@ -95,6 +96,7 @@ export function useTicketForm() {
       })
 
       if (response.ok) {
+        toast.success('Ticket criado com sucesso!')
         router.push('/os')
       } else {
         throw new Error('Erro ao criar ticket')
