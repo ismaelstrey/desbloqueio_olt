@@ -6,6 +6,7 @@ import { getToken } from 'next-auth/jwt';
 // Schema de validação para Empresa
 const empresaSchema = z.object({
   nome: z.string().min(1, 'Nome é obrigatório'),
+  userId: z.string().min(1, 'Usuario precisa está logado'),
   cnpj: z.string().regex(/^\d{14}$/, 'CNPJ deve conter 14 dígitos'),
   email: z.string().email('Email inválido'),
   telefone: z.string().min(10, 'Telefone deve ter no mínimo 10 dígitos'),
@@ -24,6 +25,7 @@ export async function GET(req: NextRequest) {
       include: {
         olts: true,
         tickets: true,
+        usuarios: true,
       },
     });
 
@@ -65,12 +67,18 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
+const {userId, ...novaEmpresa} = validacao.data
     const empresa = await prisma.empresa.create({
-      data: validacao.data,
+      data: novaEmpresa 
     });
 
-    return NextResponse.json(empresa, { status: 201 });
+    // Associar o usario logado a empresa
+   const usuario =  await prisma.user.update({
+      where: { id: body.userId },
+      data: { empresaId: empresa.id },
+    });
+
+    return NextResponse.json({empresa,usuario}, { status: 201 });
   } catch (error) {
     console.error('Erro ao criar empresa:', error);
     return NextResponse.json(

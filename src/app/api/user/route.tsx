@@ -3,10 +3,12 @@ import { NextResponse } from "next/server";
 
 
 export async function GET() {
-const data = await prisma.account.findMany(
+const data = await prisma.user.findMany(
     {
         include: {
-        user: true,
+        empresa: true,
+        Ticket: true,
+        accounts: true,
         }
      
     }

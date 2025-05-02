@@ -1,3 +1,4 @@
+import Adicionar from '@/components/Adicionar'
 import { Metadata } from 'next'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
@@ -21,6 +22,7 @@ export default async function DashboardLayout({
   return (
     <div className="min-h-screen bg-[#0F0F0F] text-white">
       <div className="container mx-auto px-4 py-8">
+        <Adicionar/>
         {children}
       </div>
     </div>
