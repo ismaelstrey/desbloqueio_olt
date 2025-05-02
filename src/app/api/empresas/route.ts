@@ -74,7 +74,7 @@ const {userId, ...novaEmpresa} = validacao.data
 
     // Associar o usario logado a empresa
    const usuario =  await prisma.user.update({
-      where: { id: body.userId },
+      where: { id: userId },
       data: { empresaId: empresa.id },
     });
 
