@@ -58,6 +58,8 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
     }
 
+    console.log(token);
+
     const searchParams = req.nextUrl.searchParams;
     const empresaId = searchParams.get('empresaId');
     const oltId = searchParams.get('oltId');
