@@ -48,7 +48,7 @@ export function useTicketForm() {
       setFormData(prev => ({
         ...prev,
         criadoPor: user.user?.email || '',
-        criadoPorId: (user.user as any)?.id || ''
+        criadoPorId: (user.user as {id:string})?.id || ''
       }))
     }
   }, [])
