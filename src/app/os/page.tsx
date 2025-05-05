@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaTicketAlt, FaCheckCircle, FaHourglassHalf, FaExclamationCircle } from 'react-icons/fa'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 interface Ticket {
   id: number
   titulo: string
@@ -21,10 +23,19 @@ export default function Dashboard() {
   const [tickets, setTickets] = useState<Ticket[]>([])
   const [loading, setLoading] = useState(true)
   const [filtroStatus, setFiltroStatus] = useState('todos')
+
+  const route = useRouter()
   const fetchTickets = async () => {
     try {
       const response = await fetch('/api/tickets' + (filtroStatus !== 'todos' ? `?status=${filtroStatus}` : ''))
       const data = await response.json()
+
+     
+      if(data.error){
+        toast.error(data.error)
+        route.push('/os/empresa/nova')
+        return
+      }
       setTickets(data)
     } catch (error) {
       console.error('Erro ao carregar tickets:', error)
@@ -117,7 +128,7 @@ export default function Dashboard() {
           <div className="text-center py-8">Carregando...</div>
         ) : (
           <div className="space-y-4">
-            {tickets.map((ticket) => (
+            {tickets.length > 0 && tickets?.map((ticket) => (
               <motion.div
                 key={ticket.id}
                 initial={{ opacity: 0, x: -20 }}

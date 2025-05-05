@@ -58,19 +58,44 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
     }
 
-    console.log(token);
+    // Buscar usuário e suas informações
+    const user = await prisma.user.findUnique({
+      where: { email: token.email! },
+      include: { empresa: true }
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: 'Usuário não encontrado' }, { status: 404 });
+    }
 
     const searchParams = req.nextUrl.searchParams;
-    const empresaId = searchParams.get('empresaId');
     const oltId = searchParams.get('oltId');
     const status = searchParams.get('status') as StatusTicket | null;
-interface WhereClause {
-  empresaId?: number;
-  oltId?: number;
-  status?: StatusTicket;
-}
+
+    interface WhereClause {
+      empresaId?: number;
+      oltId?: number;
+      status?: StatusTicket;
+    }
+
     const where: WhereClause = {};
-    if (empresaId) where.empresaId = parseInt(empresaId);
+
+    // Se for CLIENTE, força filtrar pela empresa do usuário
+    if (user.role === 'CLIENTE') {
+      if (!user.empresaId) {
+        return NextResponse.json({ error: 'Cliente sem empresa associada' }, { status: 400 });
+      }
+      where.empresaId = user.empresaId;
+    } else if (user.role === 'TECNICO') {
+      // Técnicos podem ver tickets de todas as empresas
+      const empresaId = searchParams.get('empresaId');
+      if (empresaId) where.empresaId = parseInt(empresaId);
+    } else {
+      // Admins podem filtrar por qualquer empresa
+      const empresaId = searchParams.get('empresaId');
+      if (empresaId) where.empresaId = parseInt(empresaId);
+    }
+
     if (oltId) where.oltId = parseInt(oltId);
     if (status) where.status = status;
 
@@ -79,11 +104,29 @@ interface WhereClause {
       include: {
         empresa: true,
         olt: true,
+        criadoPor: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true
+          }
+        },
+        resolvidoPor: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true
+          }
+        }
       },
       orderBy: {
         dataSolicitacao: 'desc',
       },
     });
+
+    console.log(tickets);
 
     return NextResponse.json(tickets);
   } catch (error) {

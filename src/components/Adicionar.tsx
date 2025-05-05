@@ -31,10 +31,10 @@ return <div className="fixed h-full top-8 left-8">
      initial={{ opacity: 0, x: -20 }}
      animate={{ opacity: 1, x: 0 }}
   >    <ul className="flex ml-5 mt-10 flex-col gap-8 h-full">
-            <li><Link href="/os"><FaHome title="Home" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/></Link></li>
-            <li><Link href="/os/novo-ticket"><LuTicketPlus title="Adicionar ticket" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/></Link></li>
-            <li><Link href="/os/novo-ticket"><PiListPlusFill title="Home" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/></Link></li>
-            <li><Link href="/os/empresa/nova"><TbBuildingPlus title="Adicionar empresa" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/></Link></li>
+            <li><Link className="flex group gap-4 justify-left items-center" href="/os"><FaHome title="Home" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/><span className="opacity-0 transition-all group-hover:opacity-90">Home</span></Link></li>
+            <li><Link className="flex group gap-4 justify-left items-center" href="/os/novo-ticket"><LuTicketPlus title="Adicionar ticket" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/> <span  className="opacity-0 transition-all group-hover:opacity-90">Novo Ticket</span></Link></li>
+            <li><Link className="flex group gap-4 justify-left items-center" href="/os/olt/nova"><PiListPlusFill title="Home" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/> <span  className="opacity-0 transition-all group-hover:opacity-90">Nova OLT</span></Link></li>
+            <li><Link className="flex group gap-4 justify-left items-center" href="/os/empresa/nova"><TbBuildingPlus title="Adicionar empresa" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/> <span  className="opacity-0 transition-all group-hover:opacity-90">Nova Empresa</span></Link></li>
         </ul>
         </motion.div>
 
