@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
+import { useTicketForm } from '@/hooks/useTicketForm';
 
 const oltSchema = z.object({
   empresaId: z.number().min(1, 'Empresa é obrigatória'),
@@ -29,6 +30,8 @@ export default function OltForm() {
   const router = useRouter();
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState(false);
+
+  const {empresas} = useTicketForm()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,13 +101,21 @@ export default function OltForm() {
           <label htmlFor="empresaId" className="block text-sm font-medium text-white">
             ID da Empresa*
           </label>
-          <input
-            type="number"
+
+          <select
             id="empresaId"
             name="empresaId"
             required
             className="w-full bg-gray-700 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-[#F3F821] focus:outline-none"
-          />
+          >
+            <option value="">Selecione uma empresa</option>
+            {empresas.map((empresa) => (
+              <option key={empresa.id} value={empresa.id}>
+                {empresa.nome}
+              </option>
+            ))}
+          </select>
+       
         </div>
 
         <div>

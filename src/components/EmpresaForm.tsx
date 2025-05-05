@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import {  useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
@@ -22,6 +22,7 @@ export default function EmpresaForm() {
   const router = useRouter();
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState(false);
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -156,6 +157,7 @@ export default function EmpresaForm() {
           {loading ? 'Cadastrando...' : 'Cadastrar Empresa'}
         </button>
       </form>
+
     </div>
   );
 }
