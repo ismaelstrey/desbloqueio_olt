@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
@@ -31,7 +31,11 @@ export default function OltForm() {
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
-  const {empresas} = useTicketForm()
+  const {empresas, fetchEmpresas} = useTicketForm()
+
+  useEffect(() => {
+    fetchEmpresas()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
