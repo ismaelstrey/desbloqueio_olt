@@ -34,7 +34,7 @@ export default function NovoTicket() {
       className="max-w-2xl mx-auto"
     >
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">Novo Ticket</h1>    
+      
      
       </div>
 

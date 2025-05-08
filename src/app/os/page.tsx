@@ -5,6 +5,7 @@ import { FaTicketAlt, FaCheckCircle, FaHourglassHalf, FaExclamationCircle } from
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import TituloPagina from '../ui/TituloPagina'
 interface Ticket {
   id: number
   titulo: string
@@ -80,7 +81,7 @@ export default function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         className="flex justify-between items-center"
       >
-        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <TituloPagina titulo="Dashboard" />
     
        
       </motion.div>

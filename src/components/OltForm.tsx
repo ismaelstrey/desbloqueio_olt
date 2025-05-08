@@ -94,7 +94,6 @@ export default function OltForm() {
 
   return (
     <div className="max-w-2xl mx-auto p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Cadastro de OLT</h2>
       {error && (
         <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
           {error}
