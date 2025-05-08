@@ -97,7 +97,7 @@ export function useTicketForm() {
 
       if (response.ok) {
         toast.success('Ticket criado com sucesso!')
-        router.push('/os')
+        router.push('/dashboard')
       } else {
         throw new Error('Erro ao criar ticket')
       }
