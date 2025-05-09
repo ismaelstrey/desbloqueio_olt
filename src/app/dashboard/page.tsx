@@ -137,7 +137,7 @@ export default function Dashboard() {
                 className=""
               
               >
-                <Link className="bg-gray-700 p-4 rounded-lg flex justify-between items-center hover:bg-gray-600 transition-all cursor-pointer" href={`/os/ticket/${ticket.id}`}>
+                <Link className="bg-gray-700 p-4 rounded-lg flex justify-between items-center hover:bg-gray-600 transition-all cursor-pointer" href={`/dashboard/ticket/${ticket.id}`}>
              
               <div className='flex gap-4 justify-center items-center'>    
                 {getStatusIcon(ticket.status)}
