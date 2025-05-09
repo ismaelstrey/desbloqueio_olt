@@ -37,6 +37,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+      <meta name="google-site-verification" content="exd7f_bmT0FgZ91p4xMZ6a6Ou-0WNb3XAGbJ0ayYKLo" />
       <script defer src="https://cloud.umami.is/script.js" data-website-id="c019e477-2d05-4197-a829-b122a2617447"></script>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
             "@context": "https://schema.org",

@@ -28,7 +28,10 @@ export default function TituloPagina({children,titulo}: {children?: ReactNode, t
     <h1 className="text-3xl font-bold mb-4">
       {Titulo(titulo)}  
       <br /> 
-      <GenerateBreadcrumbLinks />
+ 
+     <div className="flex gap-2 items-center">
+     <GenerateBreadcrumbLinks />
+     </div>
       {children}
     </h1>
    )
