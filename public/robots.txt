@@ -5,4 +5,4 @@ Allow: /cadastro
 Disallow: /dashboard/
 Disallow: /api/
 
-Sitemap: https://atualizarhuawei.com.br/sitemap.xml
+Sitemap: https://atualizarhuawei.com.br/sitemap/sitemap.xml
