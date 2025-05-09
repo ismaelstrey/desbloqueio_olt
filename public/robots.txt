@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /login
+Allow: /cadastro
+Disallow: /dashboard/
+Disallow: /api/
+
+Sitemap: https://desbloquio-olt.vercel.app/sitemap.xml
