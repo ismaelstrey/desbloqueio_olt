@@ -12,11 +12,10 @@
 
 ### Comandos Principais
 
-| Comando                     | Função                 | Informações Retornadas        |
-| --------------------------- | ---------------------- | ----------------------------- |
-| `display version`           | Verificar versão atual | Versão OS, Build, Data        |
-| `display startup`           | Ver firmware ativo     | Firmware atual e próximo boot |
-| `display patch-information` | Ver patches instalados | Lista de patches e status     |
+| Comando                     | Função                 | Informações Retornadas    |
+| --------------------------- | ---------------------- | ------------------------- |
+| `display version`           | Verificar versão atual | Versão OS, Build, Data    |
+| `display patch-information` | Ver patches instalados | Lista de patches e status |
 
 ### Exemplo de Saída
 
@@ -36,7 +35,7 @@ Build Time: Aug 15 2022 09:30:00
 
 | Comando                  | Descrição                    | Uso                      |
 | ------------------------ | ---------------------------- | ------------------------ |
-| `display board`          | Visão geral das placas       | Estado geral do hardware |
+| `display board 0`        | Visão geral das placas       | Estado geral do hardware |
 | `display board 0/1`      | Detalhes de placa específica | Informações detalhadas   |
 | `display port state 0/1` | Status das portas PON        | Estado operacional       |
 
@@ -51,11 +50,10 @@ Build Time: Aug 15 2022 09:30:00
 
 ### Comandos de Gerenciamento
 
-| Comando                   | Função                   | Observações              |
-| ------------------------- | ------------------------ | ------------------------ |
-| `dir /flash/`             | Listar firmwares         | Mostra arquivos .bin     |
-| `display startup`         | Ver configuração de boot | Firmware atual e próximo |
-| `display ont-version 0/1` | Verificar ONUs           | Versões compatíveis      |
+| Comando                             | Função         | Observações         |
+| ----------------------------------- | -------------- | ------------------- |
+| `display io-packetfile information` | Listar PACHS   | Mostra arquivos     |
+| `display ont-version 0/1`           | Verificar ONUs | Versões compatíveis |
 
 ### Verificações Importantes
 
@@ -109,6 +107,6 @@ Build Time: Aug 15 2022 09:30:00
 
 ### Contatos de Suporte
 
-- 📧 suporte@empresa.com
-- 📞 0800-XXX-XXXX
-- 💬 Chat online: support.empresa.com
+- 📧 noc@atualizahuawei.com.br
+- 📞 +55 (51)-9817-5470 1
+- 💬 Chat online: support.atualizahuawei.com.br

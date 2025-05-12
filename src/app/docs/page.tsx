@@ -1,5 +1,5 @@
-import DocsViewer from '@/components/DocsViewer';
+import DocsViewerV2 from '@/components/DocsViewerV2';
 
 export default function DocsPage() {
-  return <DocsViewer />;
+  return <DocsViewerV2 />;
 }

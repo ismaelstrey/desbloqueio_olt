@@ -61,7 +61,7 @@ display dba-profile profile-id 11
 
 ```bash
 # Criar DBA Profile Tipo 3 (300Mbps garantido, máx 1Gbps)
-dba-profile add profile-id 300 type 3 fix 0 assure 300000 max 1000000
+dba-profile add profile-id 300 type 3 assure 300000 max 1000000
 ```
 
 ## 🔄 CIR e PIR
