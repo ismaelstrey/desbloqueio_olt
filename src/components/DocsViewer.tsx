@@ -97,7 +97,7 @@ export default function DocsViewer() {
                 remarkPlugins={[remarkGfm]}
                 components={{                   
                    // @ts-expect-error - Component includes custom props not expected by parent
-                  code: ({ node, inline, className, children, ...props }: { node: any; inline: boolean; className?: string; children: React.ReactNode } & React.HTMLAttributes<HTMLElement>) => {
+                  code: ({  inline, className, children, ...props }: { inline: boolean; className?: string; children: React.ReactNode } & React.HTMLAttributes<HTMLElement>) => {
                     const match = /language-(\w+)/.exec(className || '');
                     return !inline && match ? (
                       <SyntaxHighlighter

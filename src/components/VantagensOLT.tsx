@@ -133,7 +133,7 @@ export function VantagensOLT() {
             <TbVersions className="w-6 h-6 mr-2 text-accent" />
             Comparativo Entre Versões
           </h3>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-hidden">
             <table className="w-full min-w-[450px]">
               <thead>
                 <tr className="border-b border-gray-700">
