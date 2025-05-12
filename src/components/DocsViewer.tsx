@@ -23,11 +23,16 @@ export default function DocsViewer() {
         // Aqui você pode implementar a lógica para buscar os documentos
         // Por enquanto, vamos carregar apenas o manual técnico
         const response = await fetch('/api/docs/manual_tecnico_dba_tcont');
+        const versao = await fetch('/api/docs/manual_tecnico_versao');
         const content = await response.text();
+        const versao_content = await versao.text();
         
         setDocs([{
           name: 'Manual Técnico: DBA e T-CONT',
           content
+        },{
+          name: 'Manual Técnico: Versão',
+          content: versao_content
         }]);
         setLoading(false);
       } catch (error) {

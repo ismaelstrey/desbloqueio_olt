@@ -2,6 +2,8 @@
 
 import { BsWhatsapp, BsEnvelope, BsLinkedin } from 'react-icons/bs';
 import { motion } from 'framer-motion';
+import { SiGoogledocs } from 'react-icons/si';
+import Link from 'next/link';
 
 export function Footer() {
   const socialLinks = [
@@ -35,6 +37,12 @@ export function Footer() {
           <div className="text-center md:text-left">
             <h3 className="text-xl font-bold mb-2">Contato</h3>
             <p>Entre em contato conosco para mais informações</p>
+          </div>
+          <div className="flex flex-col gap-2">
+         <Link href="/docs" className="text-background transition-colors flex items-center gap-2">
+          
+              <span className="">Documentação</span>
+            </Link>
           </div>
 
           <div className="flex gap-6">
