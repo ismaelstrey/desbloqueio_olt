@@ -40,8 +40,10 @@
 ### Exemplo de Verificação
 
 ```bash
+# SELESOCIONAR A PON
+interface gpon 0/2
 # Ver T-CONT de uma ONU
-display ont info 0/2/7 74
+display ont info 7 74
 
 # Ver detalhes do DBA Profile
 display dba-profile profile-id 11
