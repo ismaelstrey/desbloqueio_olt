@@ -52,7 +52,7 @@ Build Time: Aug 15 2022 09:30:00
 
 | Comando                             | Função         | Observações         |
 | ----------------------------------- | -------------- | ------------------- |
-| `display io-packetfile information` | Listar PACHS   | Mostra arquivos     |
+| `display io-packetfile information` | Listar patch   | Mostra arquivos     |
 | `display ont-version 0/1`           | Verificar ONUs | Versões compatíveis |
 
 ### Verificações Importantes
