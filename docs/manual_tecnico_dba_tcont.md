@@ -107,9 +107,7 @@ Oversubscription = 64/2.5 = 25.6:1
 
 ```bash
 # DBA Profile para 200Mbps garantidos
-dba-profile add profile-id 200 type 3
-profile-name dba-profile_200M
-fix 0 assure 200000 max 200000
+dba-profile add profile-id 200 type 3 assure 200000 max 200000
 ```
 
 ### Aplicando na ONU
