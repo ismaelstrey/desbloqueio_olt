@@ -12,7 +12,7 @@ const [slug, setSlug] = useState<string>();
   
   useEffect(() => {
    setSlug(page);
-  }, [patch,slug]); // eslint-disable-line react-hooks/exhaustive-dep
+  }, [patch,slug]); 
 
   
     const router = useRouter();

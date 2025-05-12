@@ -2,7 +2,6 @@
 
 import { BsWhatsapp, BsEnvelope, BsLinkedin } from 'react-icons/bs';
 import { motion } from 'framer-motion';
-import { SiGoogledocs } from 'react-icons/si';
 import Link from 'next/link';
 
 export function Footer() {

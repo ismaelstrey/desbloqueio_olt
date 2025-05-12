@@ -116,23 +116,23 @@ export default function DocsViewer() {
                     );
                   },
                   // Estilização personalizada para elementos markdown
-                  h1: ({ node, ...props }) => <h1 className="text-3xl font-bold mb-6 text-[#F3F821]" {...props} />,
-                  h2: ({ node, ...props }) => <h2 className="text-2xl font-bold mt-8 mb-4" {...props} />,
-                  h3: ({ node, ...props }) => <h3 className="text-xl font-semibold mt-6 mb-3" {...props} />,
-                  p: ({ node, ...props }) => <p className="mb-4 leading-relaxed" {...props} />,
-                  ul: ({ node, ...props }) => <ul className="list-disc list-inside mb-4 space-y-2" {...props} />,
-                  ol: ({ node, ...props }) => <ol className="list-decimal list-inside mb-4 space-y-2" {...props} />,
-                  li: ({ node, ...props }) => <li className="ml-4" {...props} />,
-                  table: ({ node, ...props }) => (
+                  h1: ({ ...props }) => <h1 className="text-3xl font-bold mb-6 text-[#F3F821]" {...props} />,
+                  h2: ({ ...props }) => <h2 className="text-2xl font-bold mt-8 mb-4" {...props} />,
+                  h3: ({ ...props }) => <h3 className="text-xl font-semibold mt-6 mb-3" {...props} />,
+                  p: ({ ...props }) => <p className="mb-4 leading-relaxed" {...props} />,
+                  ul: ({ ...props }) => <ul className="list-disc list-inside mb-4 space-y-2" {...props} />,
+                  ol: ({ ...props }) => <ol className="list-decimal list-inside mb-4 space-y-2" {...props} />,
+                  li: ({ ...props }) => <li className="ml-4" {...props} />,
+                  table: ({ ...props }) => (
                     <div className="overflow-x-auto mb-6">
                       <table className="min-w-full divide-y divide-gray-700" {...props} />
                     </div>
                   ),
-                  thead: ({ node, ...props }) => <thead className="bg-gray-900" {...props} />,
-                  th: ({ node, ...props }) => (
+                  thead: ({ ...props }) => <thead className="bg-gray-900" {...props} />,
+                  th: ({ ...props }) => (
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider" {...props} />
                   ),
-                  td: ({ node, ...props }) => <td className="px-6 py-4 whitespace-nowrap text-sm" {...props} />,
+                  td: ({ ...props }) => <td className="px-6 py-4 whitespace-nowrap text-sm" {...props} />,
                 }}
               >
                 {selectedDoc.content}
