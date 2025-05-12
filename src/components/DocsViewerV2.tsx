@@ -22,7 +22,6 @@ export default function DocsViewerV2() {
       try {
         const response = await fetch('/api/docs');
         const data = await response.json();
-        
         // Formata o nome do documento para exibição
         const formattedDocs = data.map((doc: Doc) => ({
           ...doc,
@@ -32,7 +31,6 @@ export default function DocsViewerV2() {
             .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ')
         }));
-        
         setDocs(formattedDocs);
         setLoading(false);
       } catch (error) {
@@ -40,7 +38,6 @@ export default function DocsViewerV2() {
         setLoading(false);
       }
     };
-
     fetchDocs();
   }, []);
 
