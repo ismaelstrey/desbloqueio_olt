@@ -33,8 +33,8 @@ return <div className="fixed h-full top-8 left-8">
   >    <ul className="flex ml-5 mt-10 flex-col gap-8 h-full">
             <li><Link className="flex group gap-4 justify-left items-center" href="/dashboard"><FaHome title="Home" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/><span className="opacity-0 transition-all group-hover:opacity-90">Home</span></Link></li>
             <li><Link className="flex group gap-4 justify-left items-center" href="/dashboard/ticket"><LuTicketPlus title="Adicionar ticket" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/> <span  className="opacity-0 transition-all group-hover:opacity-90">Novo Ticket</span></Link></li>
-            <li><Link className="flex group gap-4 justify-left items-center" href="/dashboard/olt/nova"><PiListPlusFill title="Home" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/> <span  className="opacity-0 transition-all group-hover:opacity-90">Nova OLT</span></Link></li>
-            <li><Link className="flex group gap-4 justify-left items-center" href="/dashboard/empresa/nova"><TbBuildingPlus title="Adicionar empresa" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/> <span  className="opacity-0 transition-all group-hover:opacity-90">Nova Empresa</span></Link></li>
+            <li><Link className="flex group gap-4 justify-left items-center" href="/dashboard/olt"><PiListPlusFill title="Home" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/> <span  className="opacity-0 transition-all group-hover:opacity-90">Nova OLT</span></Link></li>
+            <li><Link className="flex group gap-4 justify-left items-center" href="/dashboard/empresa"><TbBuildingPlus title="Adicionar empresa" size={40} className="hover:scale-125 scale-3d cursor-pointer transition-all"/> <span  className="opacity-0 transition-all group-hover:opacity-90">Nova Empresa</span></Link></li>
         </ul>
         </motion.div>
 
